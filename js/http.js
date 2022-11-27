@@ -62,6 +62,55 @@ export const getAllAnimationsTest = (url, succ, err) => {
             "Description": "Displays the world at a certain Co2-level.",
             "AnimationType": "co2",
             "CommandData": null
+        },
+        {
+            "Key": "INVALID_KEY",
+            "Name": "Placeholder Obj",
+            "Description": "Placeholder Description",
+            "AnimationType": "custom",
+            "CommandData": null
+        },
+        {
+            "Key": "INVALID_KEY",
+            "Name": "Placeholder Obj",
+            "Description": "Placeholder Description",
+            "AnimationType": "custom",
+            "CommandData": null
+        },
+        {
+            "Key": "INVALID_KEY",
+            "Name": "Placeholder Obj",
+            "Description": "Placeholder Description",
+            "AnimationType": "custom",
+            "CommandData": null
+        },
+        {
+            "Key": "INVALID_KEY",
+            "Name": "Placeholder Obj",
+            "Description": "Placeholder Description",
+            "AnimationType": "custom",
+            "CommandData": null
+        },
+        {
+            "Key": "INVALID_KEY",
+            "Name": "Placeholder Obj",
+            "Description": "Placeholder Description",
+            "AnimationType": "custom",
+            "CommandData": null
+        },
+        {
+            "Key": "INVALID_KEY",
+            "Name": "Placeholder Obj",
+            "Description": "Placeholder Description",
+            "AnimationType": "custom",
+            "CommandData": null
+        },
+        {
+            "Key": "INVALID_KEY",
+            "Name": "Placeholder Obj",
+            "Description": "Placeholder Description",
+            "AnimationType": "custom",
+            "CommandData": null
         }
     ]`
 
