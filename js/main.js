@@ -13,12 +13,24 @@ function createAnimationElements(json) {
 
         let child = document.createElement('div')
         child.classList.add('animation')
+        let select = makeSelectFunction(animation['Key'])        
+        child.addEventListener('click', select)
         
         let text = document.createTextNode(animation['Name'])
         child.appendChild(text)
 
         animationsContainer.appendChild(child)
     }
+}
+
+function makeSelectFunction(animationKey) {
+    let key = animationKey
+
+    function select() {
+        console.log(key + ' has been selected')
+    }
+
+    return select
 }
 
 function error(res) {
