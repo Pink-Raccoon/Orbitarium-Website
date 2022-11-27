@@ -4,6 +4,22 @@
     flex-wrap: wrap;
     justify-content: space-around;
 
+    margin: 1% 1.5%;
+
+    background-color: white;
+    border-style: solid;
+    border-color: lightsalmon;
+}
+
+#animation-selected {
+    height: 80%;
+    width: 97%;
+
+    margin: 1% 1.5%;
+
+    background-color: white;
+    border-style: solid;
+    border-color: lightsalmon;
 }
 
 .animation {
@@ -16,4 +32,8 @@
 
     width: 150px;
     height: 150px;
+}
+
+.hidden {
+    display: none;
 }
