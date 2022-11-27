@@ -33,7 +33,6 @@ export const getAllAnimations = (url, succ, err) => {
 }
 
 export const getAllAnimationsTest = (url, succ, err) => {
-    console.log('well here we are')
     let json = `[
         {
             "Key": "corona_spread_active_cases",
