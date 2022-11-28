@@ -16,6 +16,7 @@ export const GET_ANIMATION_IMAGES = BASE + '/image'
  * @param {object}      params  parameters which will be appended to the url
  */
 export const GET = (url, next, params = {}) => {
+    //Todo use fetch API
     let xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -46,6 +47,7 @@ export const GET = (url, next, params = {}) => {
  * @param {JSON}        body    body containting parameters
  */
 export const POST = (url, next, body) => {
+    //Todo use fetch API
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url);
     xhr.setRequestHeader('Content-type', 'application/json');
