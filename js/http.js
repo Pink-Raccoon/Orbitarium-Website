@@ -8,13 +8,20 @@ export const ANIMATION_INFORMATION = BASE + '/information'
 export const ROTATE_ANIMATION = BASE + '/rotate'
 export const GET_ANIMATION_IMAGES = BASE + '/image'
 
+/**
+ * Send a GET request to the url of interest.
+ * 
+ * @param {string}      url     url to which the request will be sent
+ * @param {object}      params  parameters which will be appended to the url
+ * @param {function}    next    function to be called once response is available
+ */
 export const GET = (url, params, next) => {
     let xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.status === 200) {
-            succ(JSON.parse(xhr.responseText))
+            next(JSON.parse(xhr.responseText))
         } else {
-            err(xhr.response)
+            console.log('Failed to execut request. url: ' + url + ' message: ' + xhr.responseText)
         }
     };
 
@@ -31,9 +38,17 @@ export const GET = (url, params, next) => {
     xhr.send();
 }
 
-export const POST = (url, next) => {
+/**
+ * Send a POST request to the url of interest. Additional data will be passed in the body.
+ * 
+ * @param {string}      url     url to which the request will be sent
+ * @param {JSON}        body    body containting parameters
+ * @param {function}    next    function to be called once response is available  
+ */
+export const POST = (url, body, next) => {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url);
+    xhr.setRequestHeader('Content-type', 'application/json');
 
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -43,7 +58,7 @@ export const POST = (url, next) => {
         }
     };
 
-    xhr.send();
+    xhr.send(JSON.stringify(body));
 }
 
 export const getAllAnimationsTest = (url, succ, err) => {
