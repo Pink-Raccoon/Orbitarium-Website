@@ -1,5 +1,5 @@
 const URL = 'http://localhost:12341'
-const BASE = '/animations'
+const BASE = URL + '/animations'
 
 export const All_ANIMATIONS = BASE
 export const SELECT_ANIMATION = BASE + '/select'
