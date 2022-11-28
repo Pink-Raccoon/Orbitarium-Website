@@ -15,7 +15,7 @@ export const GET_ANIMATION_IMAGES = BASE + '/image'
  * @param {function}    next    function to be called once response is available
  * @param {object}      params  parameters which will be appended to the url
  */
-export const GET = (url, next, params = {}) => {
+export const GET = async (url, next, params = {}) => {
     //Todo use fetch API
     let xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -46,7 +46,7 @@ export const GET = (url, next, params = {}) => {
  * @param {function}    next    function to be called once response is available  
  * @param {JSON}        body    body containting parameters
  */
-export const POST = (url, next, body) => {
+export const POST = async (url, next, body) => {
     //Todo use fetch API
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url);
@@ -61,6 +61,11 @@ export const POST = (url, next, body) => {
     };
 
     xhr.send(JSON.stringify(body));
+}
+
+export const parseImage = (res, next) => {
+    let blob = res.blob
+    next(URL.createObjectURL(blob))
 }
 
 export const getAllAnimationsTest = (url, succ, err) => {

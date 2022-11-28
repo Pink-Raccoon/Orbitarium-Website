@@ -37,3 +37,8 @@
 .hidden {
     display: none;
 }
+
+.image {
+    border-style: solid;
+    border-color: red;   
+}
