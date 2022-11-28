@@ -8,18 +8,32 @@ export const ANIMATION_INFORMATION = BASE + '/information'
 export const ROTATE_ANIMATION = BASE + '/rotate'
 export const GET_ANIMATION_IMAGES = BASE + '/image'
 
-export const TYPE = {
-    POST: 'post',
-    GET: 'get'
-}
-
-export const request = (type, url, next) => {
-    throw 'METHOD NOT YET IMPLEMENTED'
-}
-
-export const getAllAnimations = (url, succ, err) => {
+export const GET = (url, params, next) => {
     let xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            succ(JSON.parse(xhr.responseText))
+        } else {
+            err(xhr.response)
+        }
+    };
+
+    url += '?'
+    let notFirst = false;
+    for (let key in params) {
+        if (params.hasOwnProperty(key)) {
+            url += (notFirst ? '&' : '') + key + "=" + params[key];
+        }
+        notFirst = true;
+    }
+
     xhr.open("GET", url);
+    xhr.send();
+}
+
+export const POST = (url, next) => {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
 
     xhr.onload = function () {
         if (xhr.status === 200) {
