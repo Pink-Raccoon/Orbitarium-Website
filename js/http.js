@@ -12,10 +12,10 @@ export const GET_ANIMATION_IMAGES = BASE + '/image'
  * Send a GET request to the url of interest.
  * 
  * @param {string}      url     url to which the request will be sent
- * @param {object}      params  parameters which will be appended to the url
  * @param {function}    next    function to be called once response is available
+ * @param {object}      params  parameters which will be appended to the url
  */
-export const GET = (url, params, next) => {
+export const GET = (url, next, params = {}) => {
     let xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.status === 200) {
@@ -42,19 +42,19 @@ export const GET = (url, params, next) => {
  * Send a POST request to the url of interest. Additional data will be passed in the body.
  * 
  * @param {string}      url     url to which the request will be sent
- * @param {JSON}        body    body containting parameters
  * @param {function}    next    function to be called once response is available  
+ * @param {JSON}        body    body containting parameters
  */
-export const POST = (url, body, next) => {
+export const POST = (url, next, body) => {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", url);
     xhr.setRequestHeader('Content-type', 'application/json');
 
     xhr.onload = function () {
         if (xhr.status === 200) {
-            succ(JSON.parse(xhr.responseText))
+            next(JSON.parse(xhr.responseText))
         } else {
-            err(xhr.response)
+            console.log('Failed to execut request. url: ' + url + ' message: ' + xhr.responseText)
         }
     };
 
