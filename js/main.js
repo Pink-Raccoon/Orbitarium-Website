@@ -4,7 +4,7 @@ const selectAnimationDiv = document.getElementById('animation-selected')
 
 function loadAnimations() {
     console.log('loading all animations')
-    http.getAllAnimationsTest(http.All_ANIMATIONS, createAnimationElements, error)
+    http.GET(http.All_ANIMATIONS, createAnimationElements)
 }
 
 function createAnimationElements(json) {
