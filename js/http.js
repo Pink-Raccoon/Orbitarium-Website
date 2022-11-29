@@ -63,7 +63,15 @@ export const POST = async (url, next, body) => {
     xhr.send(JSON.stringify(body));
 }
 
-export const parseImage = (res, next) => {
+export const GETImage = (next, key) => {
+    GET(
+        GET_ANIMATION_IMAGES,
+        (res) => (http.parseImage(res, next)),
+        {animationKey: key}
+    )
+}
+
+const parseImage = (res, next) => {
     let blob = res.blob
     next(URL.createObjectURL(blob))
 }

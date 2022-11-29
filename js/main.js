@@ -19,11 +19,7 @@ function createAnimationElements(json) {
         child.addEventListener('click', select)
         
         let appendImage = makeAppendImageFunction(child)
-        http.GET(
-            http.GET_ANIMATION_IMAGES, 
-            (res) => (http.parseImage(res, appendImage)),
-            {animationKey: animation['Key']}
-        )
+        http.GETImage(appendImage, animation['Key'])
 
         let text = document.createTextNode(animation['Name'])
         child.appendChild(text)
