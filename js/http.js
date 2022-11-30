@@ -51,7 +51,7 @@ export const GET = async (url, next, params = {}) => {
  * @param {function}    next    function to be called once response is available  
  */
 export const POST = async (url, data, next) => {
-    fetch(SELECT_ANIMATION, {
+    fetch(url, {
         method: 'POST',
         body: JSON.stringify(data)
     })

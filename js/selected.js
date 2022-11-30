@@ -95,9 +95,11 @@ function sliderChanged(event) {
     console.log(event)
     let sliderValue = event.srcElement.value
     
-    http.POST(http.ADAPT_ANIMATION, next(), {
-        "key": sliderValue
-    })
+    http.POST(http.ADAPT_ANIMATION, {
+        key: sliderValue
+    },
+    () => console.log('change successful')
+    )
 
 }
 
