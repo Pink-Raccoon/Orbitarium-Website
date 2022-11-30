@@ -9,6 +9,13 @@ function makeSelectFunction(animation) {
         clearSelection()
         selectAnimationDiv.classList.remove('hidden')
 
+        http.POST(http.SELECT_ANIMATION, {
+            animationKey: animation['Key']
+        },
+        (data) => {
+            console.log('selected animation with response: ' + data)
+        })
+
         let template = document.querySelector('#selected-animation-template')
         let clone = template.content.cloneNode(true)
 
@@ -78,8 +85,19 @@ async function createSlider(parent, allSliders) {
         input.step = slider['Range'][2]
         input.value = slider.value
 
+        input.addEventListener('change', sliderChanged)
+
         parent.appendChild(clone)
     }
+}
+
+function sliderChanged(event) {
+    let sliderValue = event.srcElement.value
+    
+    http.POST(http.ADAPT_ANIMATION, next(), {
+        "key": sliderValue
+    })
+
 }
 
 async function createInfoNode(parent, infos) {

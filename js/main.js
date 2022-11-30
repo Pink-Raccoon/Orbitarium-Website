@@ -2,7 +2,6 @@ import * as http from './http.js'
 import * as select from './selected.js'
 
 function loadAnimations() {
-    console.log('loading all animations')
     http.GET(http.All_ANIMATIONS, createAnimationElements)
 }
 

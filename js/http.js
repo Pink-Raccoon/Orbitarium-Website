@@ -47,20 +47,21 @@ export const GET = async (url, next, params = {}) => {
  * Send a POST request to the url of interest. Additional data will be passed in the body.
  * 
  * @param {string}      url     url to which the request will be sent
- * @param {function}    next    function to be called once response is available  
  * @param {json}        data    json object containting data to be sent
+ * @param {function}    next    function to be called once response is available  
  */
-export const POST = async (url, next, data) => {
-    fetch(url, {
+export const POST = async (url, data, next) => {
+    fetch(SELECT_ANIMATION, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
         body: JSON.stringify(data)
     })
-    .then((response) => response.json())
+    .then((response) => {
+        console.log(response)
+
+        return response.json()
+    })
     .then((data) => next(data))
-    .catch((err) => console.log(err))
+    .catch((err) => console.log(url + ' ' + err))
 }
 
 /**
@@ -70,7 +71,6 @@ export const POST = async (url, next, data) => {
  * @param {string}      key     key of the animation of which the image should be received
  */
 export const GETImage = (next, key) => {
-    console.log('get image for key: ' + key)
     fetch(GET_ANIMATION_IMAGES + '?key=' + key, {
         referrerPolicy: 'same-origin'
     })
