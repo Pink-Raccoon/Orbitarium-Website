@@ -88,22 +88,27 @@ export const GETImage = (next, key) => {
 function testInfo() {
     let json = `
     {
-        "Description": "Displays the world at a certain Co2-level.",
-        "Name": "Co2 Animation",
-        "Key": "co2_co2animation",
-        "AnimationType": "co2",
-        "IsPlaying": "True",
-        "adapt": {
-            "slider": {
-                "PPM": "280"
-            },
-            "info": {
-                "SeaLevel": "4.60799753909669E-09",
-                "Temp": "14.0781613549508",
-                "Year": "2170"
+        "Description":"Displays the world at a certain Co2-level.",
+        "Name":"Co2 Animation",
+        "Key":"co2_co2animation",
+        "AnimationType":"co2",
+        "IsPlaying":"True",
+        "adapt":{
+            "slider":[
+                {
+                    "key":"PPM",
+                    "Name":"Parts Per Million (PPM)",
+                    "Range":[ 50, 350, 5 ],
+                    "value":230
+                }
+            ],
+            "info":{
+                "SeaLevel":"4.60799753909669E-09",
+                "Temp":"14.0781613549508",
+                "Year":"2170"
             }
         }
-    }`
+        }`
 
     return JSON.parse(json)
 }

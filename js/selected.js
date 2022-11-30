@@ -42,7 +42,6 @@ function makeAppendAnimationSpecificInformation(parent) {
         div.appendChild(document.createTextNode('i contain further information'))
 
         for (let [element, value] of Object.entries(data['adapt'])) {
-            console.log(element)
             switch (element) {
                 case 'slider':
                     let sliderDiv = document.createElement('div')
@@ -51,7 +50,7 @@ function makeAppendAnimationSpecificInformation(parent) {
                     break;
                 case 'info':
                     let infoDiv = document.createElement('div')
-                    createSlider(div, value)
+                    createInfoNode(div, value)
                     div.appendChild(infoDiv)
                     break;
                 default:
@@ -65,14 +64,32 @@ function makeAppendAnimationSpecificInformation(parent) {
     return appendAnimationSpecificInformation
 }
 
-async function createSlider(parent, sliders) {
-    for (let index in sliders) {
-        console.log('hiiiii ' + index)
+async function createSlider(parent, allSliders) {
+    let template = document.querySelector('#slider-template')
+    for (let index in allSliders) {
+        let slider = allSliders[index]
+        let clone = template.content.cloneNode(true)
+
+        clone.querySelector('h3').textContent = slider.Name
+
+        let input = clone.querySelector('input')
+        input.min = slider['Range'][0]
+        input.max = slider['Range'][1]
+        input.step = slider['Range'][2]
+        input.value = slider.value
+
+        parent.appendChild(clone)
     }
 }
 
 async function createInfoNode(parent, infos) {
-    console.log('syke' + JSON.stringify(infos))
+    let template = document.querySelector('#info-template')
+    for (let [topic, content] of Object.entries(infos)) {
+        let clone = template.content.cloneNode(true)
+        clone.querySelector('.info-topic').textContent = topic
+        clone.querySelector('.info-content').textContent = content
+        parent.appendChild(clone)
+    }
 }
 
 export {
