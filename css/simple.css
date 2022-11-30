@@ -1,3 +1,7 @@
+body {
+    font-family: Verdana, sans-serif;
+}
+
 #animations-container {
     display: flex;
     flex-direction: row;
@@ -20,6 +24,10 @@
     background-color: white;
     border-style: solid;
     border-color: lightsalmon;
+}
+
+#animation-selected h1 {
+    font-size: 32px;
 }
 
 .animation {
