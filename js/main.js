@@ -8,33 +8,26 @@ function loadAnimations() {
 
 function createAnimationElements(json) {
     let animationsContainer = document.getElementById('animations-container')
+    let template = document.querySelector('#animation-template')
 
     for (let index in json) {
         let animation = json[index]
+        let clone = template.content.cloneNode(true)
 
-        let child = document.createElement('div')
-        child.classList.add('animation')
-        let fSelect = select.makeSelectFunction(animation)        
-        child.addEventListener('click', fSelect)
-        
-        let divImg = document.createElement('div')
-        divImg.classList.add('image')
+        let fSelect = select.makeSelectFunction(animation)
+        clone.firstElementChild.addEventListener('click', fSelect)
 
-        http.GETImage((makeAppendImageFunction(divImg)), animation['Key'])
+        http.GETImage((makeAppendImageFunction(clone.querySelector('.image'))), animation['Key'])
 
-        let text = document.createTextNode(animation['Name'])
-        
-        child.appendChild(divImg)
-        child.appendChild(text)
+        clone.querySelector('.name').textContent = animation['Name']
 
-        animationsContainer.appendChild(child)
+        animationsContainer.appendChild(clone)
     }
 }
 
 function makeAppendImageFunction(parent) {
     function appendImage(imgURL) {
         let img = document.createElement('img')
-
         img.src = imgURL
         parent.appendChild(img)
     }

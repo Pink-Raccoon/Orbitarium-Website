@@ -31,7 +31,6 @@ body {
 }
 
 .animation {
-
     background-color: lightblue;
     border-style: solid;
     border-color: red;
@@ -40,6 +39,8 @@ body {
 
     width: 150px;
     height: 150px;
+
+    overflow: hidden;
 }
 
 .hidden {
@@ -47,9 +48,14 @@ body {
 }
 
 .image img {
-    border-style: solid;
-    border-color: red;   
+    display: block;
+    margin: 0px auto 5px auto;
 
-    width: 120px;
-    height: 120px;
+    width: 82%;
+    height: 82%;
+}
+
+.name {
+    text-align: center;
+    font-weight: bold;
 }

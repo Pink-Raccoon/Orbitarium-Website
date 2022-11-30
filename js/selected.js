@@ -9,25 +9,19 @@ function makeSelectFunction(animation) {
         clearSelection()
         selectAnimationDiv.classList.remove('hidden')
 
-        let div = document.createElement('div')
-        div.id = animation['Key']
-        
-        let title = document.createElement('h1')
-        title.appendChild(document.createTextNode(animation['Name']))
-        
-        let description = document.createElement('p')
-        description.appendChild(document.createTextNode('Description: ' + animation['Description']))
-        
-        let additionalInformation = document.createElement('div')
+        let template = document.querySelector('#selected-animation-template')
+        let clone = template.content.cloneNode(true)
 
-        http.GET(http.ANIMATION_INFORMATION, (makeAppendAnimationSpecificInformation(additionalInformation)))
+        clone.querySelector('.title').textContent = animation['Name']
+        clone.querySelector('#description').appendChild(document.createTextNode(animation['Description']))
 
-        div.appendChild(title)
-        div.appendChild(description)
-        div.appendChild(additionalInformation)
+        http.GET(
+            http.ANIMATION_INFORMATION, 
+            (makeAppendAnimationSpecificInformation(clone.querySelector('#adaptations')))
+        )
 
-        currentSelection = div
-        selectAnimationDiv.appendChild(div)
+        currentSelection = clone.firstElementChild
+        selectAnimationDiv.appendChild(clone)
     }
 
     return select
@@ -47,10 +41,7 @@ function makeAppendAnimationSpecificInformation(parent) {
         let div = document.createElement('div')
         div.appendChild(document.createTextNode('i contain further information'))
 
-        let adapt = data['adapt']
-        console.log(adapt)
-
-        for (let [element, value] of Object.entries(adapt)) {
+        for (let [element, value] of Object.entries(data['adapt'])) {
             console.log(element)
             switch (element) {
                 case 'slider':
@@ -76,17 +67,7 @@ function makeAppendAnimationSpecificInformation(parent) {
 
 async function createSlider(parent, sliders) {
     for (let index in sliders) {
-        let element = sliders[i]
-        let range = element['Range'] // Array to determin slider range and step size -> [start, end, step]
-
-        let input = document.createElement('input')
-        input.type = 'range'
-        input.min = range[0]
-        input.max = range[1]
-        input.setp = range[2]
-        input.value = element.value
-
-        
+        console.log('hiiiii ' + index)
     }
 }
 
