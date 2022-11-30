@@ -1,6 +1,5 @@
 import * as http from './http.js'
-
-const selectAnimationDiv = document.getElementById('animation-selected')
+import * as select from './selected.js'
 
 function loadAnimations() {
     console.log('loading all animations')
@@ -15,12 +14,12 @@ function createAnimationElements(json) {
 
         let child = document.createElement('div')
         child.classList.add('animation')
-        let select = makeSelectFunction(animation)        
-        child.addEventListener('click', select)
+        let fSelect = select.makeSelectFunction(animation)        
+        child.addEventListener('click', fSelect)
         
         let divImg = document.createElement('div')
         divImg.classList.add('image')
-        
+
         let appendImage = makeAppendImageFunction(divImg)
         http.GETImage(appendImage, animation['Key'])
 
@@ -33,25 +32,6 @@ function createAnimationElements(json) {
     }
 }
 
-function makeSelectFunction(animation) {
-    function select() {
-        console.log('selected: ' + animation['Key'])
-        selectAnimationDiv.classList.remove('hidden')
-
-        let div = document.createElement('div')
-        div.id = animation['Key']
-        
-        let title = document.createTextNode(animation['Name'])
-        let text = document.createTextNode('Description' + animation['Description'])
-
-        div.appendChild(title)
-        div.appendChild(text)
-        selectAnimationDiv.appendChild(div)
-    }
-
-    return select
-}
-
 function makeAppendImageFunction(parent) {
     function appendImage(imgURL) {
         let img = document.createElement('img')
@@ -61,10 +41,6 @@ function makeAppendImageFunction(parent) {
     }
 
     return appendImage
-}
-
-function error(res) {
-    console.log('an error occured with response: ' + res)
 }
 
 loadAnimations()
