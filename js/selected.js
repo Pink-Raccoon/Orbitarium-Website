@@ -12,8 +12,8 @@ function makeSelectFunction(animation) {
         http.POST(http.SELECT_ANIMATION, {
             animationKey: animation['Key']
         },
-        (data) => {
-            console.log('selected animation with response: ' + data)
+        () => {
+            console.log("select animation succeeded")
         })
 
         let template = document.querySelector('#selected-animation-template')
@@ -92,6 +92,7 @@ async function createSlider(parent, allSliders) {
 }
 
 function sliderChanged(event) {
+    console.log(event)
     let sliderValue = event.srcElement.value
     
     http.POST(http.ADAPT_ANIMATION, next(), {

@@ -56,11 +56,10 @@ export const POST = async (url, data, next) => {
         body: JSON.stringify(data)
     })
     .then((response) => {
-        console.log(response)
-
-        return response.json()
+        if (response.ok) {
+            next()
+        }
     })
-    .then((data) => next(data))
     .catch((err) => console.log(url + ' ' + err))
 }
 
