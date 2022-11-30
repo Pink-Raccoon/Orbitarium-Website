@@ -48,27 +48,18 @@ function displaySelectedAnimation(animation) {
 }
 
 function appendAnimationSpecificInformation(parent, data) {
-    let div = document.createElement('div')
-    div.appendChild(document.createTextNode('i contain further information'))
-
     for (let [element, value] of Object.entries(data['adapt'])) {
         switch (element) {
             case 'slider':
-                let sliderDiv = document.createElement('div')
-                createSlider(div, value)
-                div.appendChild(sliderDiv)
+                createSlider(parent, value)
                 break;
             case 'info':
-                let infoDiv = document.createElement('div')
-                createInfoNode(div, value)
-                div.appendChild(infoDiv)
+                createInfoNode(parent, value)
                 break;
             default:
                 console.log('unknown adaptation')
         }
     }
-
-    parent.appendChild(div)
 }
 
 async function createSlider(parent, allSliders) {
