@@ -26,10 +26,6 @@ body {
     border-color: lightsalmon;
 }
 
-#animation-selected h1 {
-    font-size: 32px;
-}
-
 .animation {
     background-color: lightblue;
     border-style: solid;
@@ -41,10 +37,6 @@ body {
     height: 150px;
 
     overflow: hidden;
-}
-
-.hidden {
-    display: none;
 }
 
 .image img {

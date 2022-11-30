@@ -1,0 +1,31 @@
+body {
+    font-family: Verdana, sans-serif;
+}
+
+#animations-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    margin: 1% 1.5%;
+
+    background-color: white;
+    border-style: solid;
+    border-color: lightsalmon;
+}
+
+#animation-selected {
+    height: 80%;
+    width: 97%;
+
+    margin: 1% 1.5%;
+
+    background-color: white;
+    border-style: solid;
+    border-color: lightsalmon;
+}
+
+.hidden {
+    display: none;
+}
