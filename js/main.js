@@ -16,7 +16,10 @@ function createAnimationElements(json) {
         let fSelect = select.makeSelectFunction(animation)
         clone.firstElementChild.addEventListener('click', fSelect)
 
-        http.GETImage((makeAppendImageFunction(clone.querySelector('.image'))), animation['Key'])
+        let parent = clone.querySelector('.image')
+        http.GETImage((imgURL) => {
+            appendImage(parent, imgURL)
+        }, animation['Key'])
 
         clone.querySelector('.name').textContent = animation['Name']
 
@@ -24,14 +27,11 @@ function createAnimationElements(json) {
     }
 }
 
-function makeAppendImageFunction(parent) {
-    function appendImage(imgURL) {
-        let img = document.createElement('img')
-        img.src = imgURL
-        parent.appendChild(img)
-    }
-
-    return appendImage
+function appendImage(parent, imgURL) {
+    let img = document.createElement('img')
+    img.src = imgURL
+    parent.appendChild(img)
 }
+
 
 loadAnimations()
