@@ -43,6 +43,9 @@ function displaySelectedAnimation(animation) {
         }
     )
 
+    let startStopButtonHandler = makeStartStopButtonHandler()
+    clone.querySelector('button').addEventListener('click', startStopButtonHandler)
+
     currentSelection = clone.firstElementChild
     selectAnimationDiv.appendChild(clone)
 }
@@ -102,6 +105,36 @@ async function createInfoNode(parent, infos) {
         clone.querySelector('.info-content').textContent = content
         parent.appendChild(clone)
     }
+}
+
+function makeStartStopButtonHandler() {
+    let isAnimationRunning = false
+
+    function handleButtonState(event ) {
+        let button = event.target
+
+        if (isAnimationRunning) {
+            //http.POST(start, {}, () => {
+            //    button.textContent = 'Start Animation'
+            //    isAnimationRunning = false
+            //})
+
+            button.textContent = 'Start Animation'
+            isAnimationRunning = false
+            console.log('animation has been stopped')
+        } else {
+            //http.POST(start, {}, () => {
+            //    button.textContent = 'Stop Animation'
+            //    isAnimationRunning = true
+            //})
+
+            button.textContent = 'Stop Animation'
+            isAnimationRunning = true
+            console.log('animation has been started')
+        }
+    }
+
+    return handleButtonState
 }
 
 export {
