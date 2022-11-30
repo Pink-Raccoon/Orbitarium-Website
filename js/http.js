@@ -11,14 +11,14 @@ export const GET_ANIMATION_IMAGES = BASE + '/image'
 /**
  * Send a GET request to the url of interest.
  * 
- * @param {string}      url     url to which the request will be sent
- * @param {function}    next    function to be called once response is available
- * @param {object}      params  parameters which will be appended to the url
+ * @param {string}          url         The url at which the request will be sent.
+ * @param {function(data)}  callback    Callback which is being called when request was handled successfully. 
+ * @param {object}          params      An object containting parameters key, value pairs which will be appended to the url.
  */
-export const GET = async (url, next, params = {}) => {
+export const GET = (url, callback, params = {}) => {
 
     if (url === ANIMATION_INFORMATION) {
-        next(testInfo())
+        callback(testInfo())
         return
     }
 
@@ -39,25 +39,25 @@ export const GET = async (url, next, params = {}) => {
 
         return response.json()
     })
-    .then((data) => next(data))
+    .then((data) => callback(data))
     .catch((err) => console.log(err))
 }
 
 /**
  * Send a POST request to the url of interest. Additional data will be passed in the body.
  * 
- * @param {string}      url     url to which the request will be sent
- * @param {json}        data    json object containting data to be sent
- * @param {function}    next    function to be called once response is available  
+ * @param {string}          url         The url at which the request will be sent.
+ * @param {object}          data        An object containting all data which will be added to the body.
+ * @param {function()}      callback    Callback which is being called when request was handled successfully.   
  */
-export const POST = async (url, data, next) => {
+export const POST = (url, data, callback) => {
     fetch(url, {
         method: 'POST',
         body: JSON.stringify(data)
     })
     .then((response) => {
         if (response.ok) {
-            next()
+            callback()
         }
     })
     .catch((err) => console.log(url + ' ' + err))
@@ -66,10 +66,10 @@ export const POST = async (url, data, next) => {
 /**
  * Get an image from the server.
  * 
- * @param {function}    next    function to be called once response is available 
- * @param {string}      key     key of the animation of which the image should be received
+ * @param {function(data)}  callback    Callback which is being called when request was handled successfully.  
+ * @param {string}          key         The key of the animation of which the image should be received.
  */
-export const GETImage = (next, key) => {
+export const GETImage = (callback, key) => {
     fetch(GET_ANIMATION_IMAGES + '?key=' + key, {
         referrerPolicy: 'same-origin'
     })
@@ -80,7 +80,7 @@ export const GETImage = (next, key) => {
 
         return response.blob()
     })
-    .then((blob) => next(URL.createObjectURL(blob)))
+    .then((blob) => callback(URL.createObjectURL(blob)))
     .catch((err) => console.log(err))
 }
 
