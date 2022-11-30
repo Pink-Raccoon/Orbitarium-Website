@@ -16,6 +16,12 @@ export const GET_ANIMATION_IMAGES = BASE + '/image'
  * @param {object}      params  parameters which will be appended to the url
  */
 export const GET = async (url, next, params = {}) => {
+
+    if (url === ANIMATION_INFORMATION) {
+        next(testInfo())
+        return
+    }
+
     url += '?'
     let notFirst = false;
     for (let key in params) {
@@ -77,4 +83,27 @@ export const GETImage = (next, key) => {
     })
     .then((blob) => next(URL.createObjectURL(blob)))
     .catch((err) => console.log(err))
+}
+
+function testInfo() {
+    let json = `
+    {
+        "Description": "Displays the world at a certain Co2-level.",
+        "Name": "Co2 Animation",
+        "Key": "co2_co2animation",
+        "AnimationType": "co2",
+        "IsPlaying": "True",
+        "adapt": {
+            "slider": {
+                "PPM": "280"
+            },
+            "info": {
+                "SeaLevel": "4.60799753909669E-09",
+                "Temp": "14.0781613549508",
+                "Year": "2170"
+            }
+        }
+    }`
+
+    return JSON.parse(json)
 }
