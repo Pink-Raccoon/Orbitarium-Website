@@ -20,8 +20,7 @@ function createAnimationElements(json) {
         let divImg = document.createElement('div')
         divImg.classList.add('image')
 
-        let appendImage = makeAppendImageFunction(divImg)
-        http.GETImage(appendImage, animation['Key'])
+        http.GETImage((makeAppendImageFunction(divImg)), animation['Key'])
 
         let text = document.createTextNode(animation['Name'])
         
