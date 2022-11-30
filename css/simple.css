@@ -38,7 +38,10 @@
     display: none;
 }
 
-.image {
+.image img {
     border-style: solid;
     border-color: red;   
+
+    width: 120px;
+    height: 120px;
 }

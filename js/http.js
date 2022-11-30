@@ -1,5 +1,5 @@
-const URL = 'http://localhost:12341'
-const BASE = URL + '/animations'
+const DOMAIN = 'http://localhost:12341'
+const BASE = DOMAIN + '/animations'
 
 export const All_ANIMATIONS = BASE
 export const SELECT_ANIMATION = BASE + '/select'
@@ -16,16 +16,6 @@ export const GET_ANIMATION_IMAGES = BASE + '/image'
  * @param {object}      params  parameters which will be appended to the url
  */
 export const GET = async (url, next, params = {}) => {
-    //Todo use fetch API
-    let xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            next(JSON.parse(xhr.responseText))
-        } else {
-            console.log('Failed to execut request. url: ' + url + ' message: ' + xhr.responseText)
-        }
-    };
-
     url += '?'
     let notFirst = false;
     for (let key in params) {
@@ -35,8 +25,16 @@ export const GET = async (url, next, params = {}) => {
         notFirst = true;
     }
 
-    xhr.open("GET", url);
-    xhr.send();
+    fetch(url)
+    .then((response) => {
+        if (!response.ok) {
+            throw "Network error"
+        }
+
+        return response.json()
+    })
+    .then((data) => next(data))
+    .catch((err) => console.log(err))
 }
 
 /**
@@ -44,118 +42,39 @@ export const GET = async (url, next, params = {}) => {
  * 
  * @param {string}      url     url to which the request will be sent
  * @param {function}    next    function to be called once response is available  
- * @param {JSON}        body    body containting parameters
+ * @param {json}        data    json object containting data to be sent
  */
-export const POST = async (url, next, body) => {
-    //Todo use fetch API
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", url);
-    xhr.setRequestHeader('Content-type', 'application/json');
-
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            next(JSON.parse(xhr.responseText))
-        } else {
-            console.log('Failed to execut request. url: ' + url + ' message: ' + xhr.responseText)
-        }
-    };
-
-    xhr.send(JSON.stringify(body));
+export const POST = async (url, next, data) => {
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then((response) => response.json())
+    .then((data) => next(data))
+    .catch((err) => console.log(err))
 }
 
+/**
+ * Get an image from the server.
+ * 
+ * @param {function}    next    function to be called once response is available 
+ * @param {string}      key     key of the animation of which the image should be received
+ */
 export const GETImage = (next, key) => {
-    GET(
-        GET_ANIMATION_IMAGES,
-        (res) => (http.parseImage(res, next)),
-        {animationKey: key}
-    )
-}
-
-const parseImage = (res, next) => {
-    let blob = res.blob
-    next(URL.createObjectURL(blob))
-}
-
-export const getAllAnimationsTest = (url, succ, err) => {
-    let json = `[
-        {
-            "Key": "corona_spread_active_cases",
-            "Name": "Corona Spread Active Cases",
-            "Description": "This animation displays all active cases of Covid-19 infections for any given day in every tracked country starting on January 22nd, 2020. DISCLAIMER: The active infection count for each US state is estimated! We do not have the exact active infection count per state!",
-            "AnimationType": "custom",
-            "CommandData": null
-        },
-        {
-            "Key": "website_windy",
-            "Name": "Windy",
-            "Description": "Displays live weather.",
-            "AnimationType": "website",
-            "CommandData": null
-        },
-        {
-            "Key": "video_firstvideo",
-            "Name": "First Video",
-            "Description": "First video to display.",
-            "AnimationType": "video",
-            "CommandData": null
-        },
-        {
-            "Key": "co2_co2animation",
-            "Name": "Co2 Animation",
-            "Description": "Displays the world at a certain Co2-level.",
-            "AnimationType": "co2",
-            "CommandData": null
-        },
-        {
-            "Key": "INVALID_KEY",
-            "Name": "Placeholder Obj",
-            "Description": "Placeholder Description",
-            "AnimationType": "custom",
-            "CommandData": null
-        },
-        {
-            "Key": "INVALID_KEY",
-            "Name": "Placeholder Obj",
-            "Description": "Placeholder Description",
-            "AnimationType": "custom",
-            "CommandData": null
-        },
-        {
-            "Key": "INVALID_KEY",
-            "Name": "Placeholder Obj",
-            "Description": "Placeholder Description",
-            "AnimationType": "custom",
-            "CommandData": null
-        },
-        {
-            "Key": "INVALID_KEY",
-            "Name": "Placeholder Obj",
-            "Description": "Placeholder Description",
-            "AnimationType": "custom",
-            "CommandData": null
-        },
-        {
-            "Key": "INVALID_KEY",
-            "Name": "Placeholder Obj",
-            "Description": "Placeholder Description",
-            "AnimationType": "custom",
-            "CommandData": null
-        },
-        {
-            "Key": "INVALID_KEY",
-            "Name": "Placeholder Obj",
-            "Description": "Placeholder Description",
-            "AnimationType": "custom",
-            "CommandData": null
-        },
-        {
-            "Key": "INVALID_KEY",
-            "Name": "Placeholder Obj",
-            "Description": "Placeholder Description",
-            "AnimationType": "custom",
-            "CommandData": null
+    console.log('get image for key: ' + key)
+    fetch(GET_ANIMATION_IMAGES + '?key=' + key, {
+        referrerPolicy: 'same-origin'
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw "network error"
         }
-    ]`
 
-    succ(JSON.parse(json))
+        return response.blob()
+    })
+    .then((blob) => next(URL.createObjectURL(blob)))
+    .catch((err) => console.log(err))
 }

@@ -18,10 +18,15 @@ function createAnimationElements(json) {
         let select = makeSelectFunction(animation)        
         child.addEventListener('click', select)
         
-        let appendImage = makeAppendImageFunction(child)
+        let divImg = document.createElement('div')
+        divImg.classList.add('image')
+        
+        let appendImage = makeAppendImageFunction(divImg)
         http.GETImage(appendImage, animation['Key'])
 
         let text = document.createTextNode(animation['Name'])
+        
+        child.appendChild(divImg)
         child.appendChild(text)
 
         animationsContainer.appendChild(child)
@@ -52,7 +57,6 @@ function makeAppendImageFunction(parent) {
         let img = document.createElement('img')
 
         img.src = imgURL
-        img.classList.add('image')
         parent.appendChild(img)
     }
 
