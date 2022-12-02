@@ -9,10 +9,6 @@ body {
     justify-content: space-around;
 
     margin: 1% 1.5%;
-
-    background-color: white;
-    border-style: solid;
-    border-color: lightsalmon;
 }
 
 #animation-selected {
@@ -20,10 +16,6 @@ body {
     width: 97%;
 
     margin: 1% 1.5%;
-
-    background-color: white;
-    border-style: solid;
-    border-color: lightsalmon;
 }
 
 .hidden {

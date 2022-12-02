@@ -2,6 +2,27 @@
     font-size: 32px;
 }
 
+.sphere {
+    width: 500px;
+    height: 500px;
+
+    margin: 20px auto 20px auto;
+}
+
+.slider {
+    display: grid;
+    grid-template-columns: 30% 50%;
+}
+
+.info {
+    display: grid;
+    grid-template-columns: 10% 80%;
+}
+
+.info-topic {
+    font-weight: bold;
+}
+
 .button {
     background-color: rgba(0,100,166,255);
     border: 5px solid transparent;
@@ -10,7 +31,7 @@
     color: white;
     font-size: 32px;
     font-weight: bold;
-    width: 80%;
+    width: 100%;
 
 
     
@@ -18,8 +39,6 @@
     margin-bottom: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-
-    transform: translateX(+10%)
 }
 
 .button:hover {
