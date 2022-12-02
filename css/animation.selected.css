@@ -2,6 +2,10 @@
     font-size: 32px;
 }
 
+.adaptations {
+    margin-bottom: 20px;
+}
+
 .sphere {
     width: 500px;
     height: 500px;
@@ -17,6 +21,8 @@
 .info {
     display: grid;
     grid-template-columns: 10% 80%;
+
+    margin: 2px auto 2px auto;
 }
 
 .info-topic {
