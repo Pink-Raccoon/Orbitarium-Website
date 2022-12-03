@@ -1,0 +1,41 @@
+.video-button-container {
+    height: 130px;
+    width: 100%;
+    
+    display: grid;
+    grid-template-columns: 40% 20% 40%;    
+    justify-items: center;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.video-button {
+    background-color: rgba(0,100,166,255);
+    border: none;
+    border-radius: 5px;
+
+    height: 100px;
+    width: 180px;
+
+    display: grid;
+    justify-content: space-evenly;
+    justify-items: center;
+    align-items: center;
+}
+
+.video-button img {
+    height: 70%;
+}
+
+.video-button-left {
+    justify-self: end;
+}
+
+.video-button-right {
+    justify-self: start;
+}
+
+.video-button-middle {
+    justify-self: center;
+
+    height: 130px;
+}
