@@ -22,6 +22,9 @@ const fillCo2Template = (template, data) => {
     infoNodes[0].querySelector('.info-content').textContent = data['Information']['SeaLevel']
     infoNodes[1].querySelector('.info-content').textContent = data['Information']['Temp']
     infoNodes[2].querySelector('.info-content').textContent = data['Information']['Year']
+
+    let button = template.querySelector('.button')
+    button.addEventListener('click', (co2Button(button, data['IsPlaying'])))
 }
 
 const sendSliderChangeValue = (value) => {
@@ -33,6 +36,28 @@ const sendSliderChangeValue = (value) => {
             }
         },
         () => console.log('successfully updated'))
+}
+
+const co2Button = (button, playing) => {
+    let isPlaying = playing
+
+    let changeText = () => {
+        if (isPlaying) {
+            button.innerHTML = 'Stop Animation'
+            isPlaying = false
+        } else {
+            button.innerHTML = 'Start Animation'
+            isPlaying = true
+        }
+    }
+
+    return () => {
+        http.POST(http.ADAPT_ANIMATION,
+            {
+                CommandName: "play_pause_co2"
+            },
+            changeText)
+    }
 }
 
 
