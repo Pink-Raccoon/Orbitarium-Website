@@ -1,4 +1,4 @@
-function fillCo2Template(template, data) {
+const fillCo2Template = (template, data) => {
     console.log(data)
 
 }

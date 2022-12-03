@@ -1,4 +1,4 @@
-function fillWebsiteTemplate(template, data) {
+const fillWebsiteTemplate = (template, data) => {
     console.log(data)
 }
 

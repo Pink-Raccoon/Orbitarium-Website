@@ -1,4 +1,4 @@
-function fillVideoTemplate(template, data) {
+const fillVideoTemplate = (template, data) => {
     console.log(data)
 
 }
