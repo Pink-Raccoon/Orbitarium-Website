@@ -30,21 +30,77 @@ function clearSelection() {
 }
 
 function displaySelectedAnimation(animation) {
-    let template = document.querySelector('#selected-animation-template')
-    let clone = template.content.cloneNode(true)
+    let type = animation['AnimationType']
 
-    clone.querySelector('.title').textContent = animation['Name']
-    clone.querySelector('#description').appendChild(document.createTextNode(animation['Description']))
+    switch (type) {
+        case 'custom':
+            return createCustomAnimation()
+        case 'website':
+            return createWebsiteAnimation()
+        case 'video':
+            return createVideoAnimation()
+        case 'co2':
+            return createCo2Animation()
+        default:
+            break;
+    }
+}
+
+function createCustomAnimation() {
+    let template = document.querySelector('#custom-animation-template')
+    let clone = template.content.cloneNode(true)
 
     http.GET(
         http.ANIMATION_INFORMATION, 
         (data) => {
-            appendAnimationSpecificInformation(clone.querySelector('#adaptations'), data)
+            console.log('hi, custom')
         }
     )
 
-    let startStopButtonHandler = makeStartStopButtonHandler()
-    clone.querySelector('button').addEventListener('click', startStopButtonHandler)
+    currentSelection = clone.firstElementChild
+    selectAnimationDiv.appendChild(clone)
+}
+
+function createWebsiteAnimation() {
+    let template = document.querySelector('#website-template')
+    let clone = template.content.cloneNode(true)
+
+    http.GET(
+        http.ANIMATION_INFORMATION, 
+        (data) => {
+            console.log('hi, website')
+        }
+    )
+
+    currentSelection = clone.firstElementChild
+    selectAnimationDiv.appendChild(clone)
+}
+
+function createVideoAnimation() {
+    let template = document.querySelector('#video-animation-template')
+    let clone = template.content.cloneNode(true)
+
+    http.GET(
+        http.ANIMATION_INFORMATION, 
+        (data) => {
+            console.log('hi, video')
+        }
+    )
+
+    currentSelection = clone.firstElementChild
+    selectAnimationDiv.appendChild(clone)
+}
+
+function createCo2Animation() {
+    let template = document.querySelector('#co2-animation-template')
+    let clone = template.content.cloneNode(true)
+
+    http.GET(
+        http.ANIMATION_INFORMATION, 
+        (data) => {
+            console.log('hi, co2')
+        }
+    )
 
     currentSelection = clone.firstElementChild
     selectAnimationDiv.appendChild(clone)
