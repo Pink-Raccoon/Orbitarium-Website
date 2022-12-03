@@ -4,17 +4,17 @@ const fillVideoTemplate = (template, data) => {
     template.querySelector('.title').textContent = data['Name']
     template.querySelector('#description').append(document.createTextNode(data['Description']))
     
-    //let fastBackwardsButton = template.querySelector('.video-button-left')
-    //let playPauseButton = template.querySelector('.video-button-middle')
-    //let fastForwardButton = template.querySelector('.video-button-right')
-//
-    //fastBackwardsButton.addEventListener('click', (handleFastBackwards(fastBackwardsButton)))
-    //playPauseButton.addEventListener('click', (handlePlayPause(playPauseButton)))
-    //fastForwardButton.addEventListener('click', (handleFastForward(fastForwardButton)))
+    let fastBackwardsButton = template.querySelector('#fast-backwards-button')
+    let playPauseButton = template.querySelector('#play-pause-button')
+    let fastForwardButton = template.querySelector('#fast-forward-button')
+   
+    fastBackwardsButton.addEventListener('click', (handleFastBackwards(fastBackwardsButton)))
+    playPauseButton.addEventListener('click', (handlePlayPause(playPauseButton)))
+    fastForwardButton.addEventListener('click', (handleFastForward(fastForwardButton)))
 }
 
 const handleFastBackwards = (button) => {
-    const toggleSkip = () => button.classList.toggle('playing')
+    const toggleSkip = () => button.parentNode.classList.toggle('playing')
 
     return () => {
         http.POST(http.ADAPT_ANIMATION,
@@ -40,7 +40,7 @@ const handlePlayPause = (button) => {
 }
 
 const handleFastForward = (button) => {
-    const toggleSkip = () => button.classList.toggle('playing')
+    const toggleSkip = () => button.parentNode.classList.toggle('playing')
 
     return () => {
         http.POST(http.ADAPT_ANIMATION,

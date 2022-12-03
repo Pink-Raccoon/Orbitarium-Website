@@ -18,6 +18,7 @@
     background-color: rgba(0, 100, 166, 255);
     border: none;
     border-radius: 5px;
+    position: relative;
 
     height: 80%;
     width: 20%;
@@ -56,4 +57,38 @@
 
 .button-right {
     justify-content: start;
+}
+
+
+.video-button::before,
+.video-button::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: calc(100% + 12%);
+    height: calc(100% + 12%);
+    top: -6%;
+    left: -6%;
+    background: linear-gradient(45deg, 
+        #0096FF, #0047AB, #000000, #6082B6, #87CEEB, #00008B, #145DA0,
+        #00008B, #145DA0, #0096FF, #0047AB, #000000, #6082B6, #87CEEB
+    );
+    background-repeat: repeat;
+    border-radius: 5px;
+    background-size: 500%;
+    animation: border 12s linear infinite;
+}
+
+.video-button::after {
+    filter: blur(25px);
+}
+
+@keyframes border {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 250% 250%;
+    }
 }
