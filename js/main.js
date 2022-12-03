@@ -7,7 +7,7 @@ function loadAnimations() {
 
 function createAnimationElements(json) {
     let animationsContainer = document.getElementById('animations-container')
-    let template = document.querySelector('#animation-template')
+    let template = document.querySelector('#selectable-animation-template')
 
     for (let index in json) {
         let animation = json[index]
