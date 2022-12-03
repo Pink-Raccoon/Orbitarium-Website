@@ -72,15 +72,15 @@ function displaySelectedAnimation(animation) {
 function createAnimation(templateId, callback) {
     let template = document.querySelector(templateId)
     let clone = template.content.cloneNode(true)
+    currentSelection = clone.firstElementChild
 
     http.GET(
         http.ANIMATION_INFORMATION, 
         (data) => {
-            callback(clone, data)
+            callback(currentSelection, data)
         }
     )
 
-    currentSelection = clone.firstElementChild
     selectAnimationDiv.appendChild(clone)
 }
 
