@@ -14,7 +14,7 @@ const fillVideoTemplate = (template, data) => {
 }
 
 const handleFastBackwards = (button) => {
-    const toggleSkip = () => button.parentNode.classList.toggle('playing')
+    const toggleSkip = () => button.parentNode.classList.toggle('animation-play-button')
 
     return () => {
         http.POST(http.ADAPT_ANIMATION,
@@ -28,6 +28,7 @@ const handleFastBackwards = (button) => {
 const handlePlayPause = (button) => {
     const togglePlayPause = () => {
         (button.querySelectorAll('img')).forEach(img => img.classList.toggle('hidden'))
+        button.parentNode.classList.toggle('animation-play-button')
     }
 
     return () => {
@@ -40,7 +41,7 @@ const handlePlayPause = (button) => {
 }
 
 const handleFastForward = (button) => {
-    const toggleSkip = () => button.parentNode.classList.toggle('playing')
+    const toggleSkip = () => button.parentNode.classList.toggle('animation-play-button')
 
     return () => {
         http.POST(http.ADAPT_ANIMATION,

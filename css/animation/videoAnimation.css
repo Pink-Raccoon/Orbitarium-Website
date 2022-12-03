@@ -60,8 +60,8 @@
 }
 
 
-.video-button::before,
-.video-button::after {
+.animation-play-button::before,
+.animation-play-button::after {
     content: '';
     position: absolute;
     z-index: -1;
@@ -79,7 +79,7 @@
     animation: border 12s linear infinite;
 }
 
-.video-button::after {
+.animation-play-button::after {
     filter: blur(25px);
 }
 
