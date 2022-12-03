@@ -14,7 +14,7 @@
     border-radius: 5px;
 
     height: 100px;
-    width: 180px;
+    min-width: 120px;
 
     display: grid;
     justify-content: space-evenly;
@@ -28,14 +28,17 @@
 
 .video-button-left {
     justify-self: end;
+    max-width: 20%;
 }
 
 .video-button-right {
     justify-self: start;
+    max-width: 20%;
 }
 
 .video-button-middle {
     justify-self: center;
 
     height: 130px;
+    max-width: 50%;
 }
