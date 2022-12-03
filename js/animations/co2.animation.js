@@ -23,7 +23,7 @@ const fillCo2Template = (template, data) => {
     infoNodes[1].querySelector('.info-content').textContent = data['Information']['Temp']
     infoNodes[2].querySelector('.info-content').textContent = data['Information']['Year']
 
-    let button = template.querySelector('.button')
+    let button = template.querySelector('#co2-button')
     button.addEventListener('click', (co2Button(button, data['IsPlaying'])))
 }
 
@@ -59,8 +59,6 @@ const co2Button = (button, playing) => {
             changeText)
     }
 }
-
-
 
 export {
     fillCo2Template as fillCo2Template

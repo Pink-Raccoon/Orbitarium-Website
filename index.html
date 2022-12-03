@@ -29,16 +29,29 @@
         <div id="description">
             <b>Description: </b>
         </div>
-        <div class="adaptations video-button-container">
-            <button type="button" class="video-button video-button-left">
-                <img src="./img/fast-backwards-icon.png">
-            </button>
-            <button type="button" class="video-button video-button-middle">
-                <img src="./img/play-icon.png">
-            </button>
-            <button type="button" class="video-button video-button-right">
-                <img src="./img/fast-forward-icon.png">
-            </button>
+        <div class="adaptations button-container">
+            <div class="video-button-container button-left">
+                <div class="video-button">
+                    <button type="button">
+                        <img src="./img/fast-backwards-icon.png">
+                    </button>
+                </div>
+            </div>
+            <div class="video-button-container button-middle">
+                <div class="video-button video-button-middle">
+                    <button type="button">
+                        <img src="./img/play-icon.png">
+                        <img src="./img/pause-icon.png" class="hidden">
+                    </button>
+                </div>
+            </div>
+            <div class="video-button-container button-right">
+                <div class="video-button">
+                    <button type="button">
+                        <img src="./img/fast-forward-icon.png">
+                     </button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -91,7 +104,7 @@
                 <div class="info-content"></div>
             </div>
         </div>
-        <button type="button" class="button">Start Animation</button>
+        <button type="button" id="co2-button">Start Animation</button>
     </div>
 </template>
 </html> 

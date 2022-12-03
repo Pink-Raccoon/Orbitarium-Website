@@ -21,7 +21,7 @@
     font-weight: bold;
 }
 
-.button {
+#co2-button {
     background-color: rgba(0,100,166,255);
     border: 5px solid transparent;
     border-radius: 5px;
@@ -39,7 +39,7 @@
     padding-bottom: 5px;
 }
 
-.button:hover {
+#co2-button:hover {
     border: 5px solid lightblue;
     border-radius: 5px;
 }
