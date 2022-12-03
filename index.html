@@ -13,36 +13,80 @@
     <div id="animations-container"></div>
     <div id="animation-selected" class="hidden"></div>
 </body>
-
-<template id="animation-template">
+<template id="selectable-animation-template">
     <div class="animation">
         <div class="image"></div>
         <div class="name"></div>
     </div>
 </template>
-<template id="selected-animation-template">
+<template id="video-animation-template">
     <div class="selected-container">
-        <h2 class="title"></h2>
+        <div class="title"></div>
         <div id="description">
             <b>Description: </b>
         </div>
-        <div class="sphere"> 
-            <img src="https://www.nasa.gov/centers/goddard/images/content/638831main_globe_east_2048.jpg" alt="THE EARTH!" width="100%">
+        <div class="adaptations">
+            <button type="button" class="video-button">
+                <img src="./img/fast-backwards-icon.png">
+            </button>
+            <button type="button" class="video-button middle-button">
+                <img src="./img/play-icon.png">
+            </button>
+            <button type="button" class="video-button">
+                <img src="./img/fast-forward-icon.png">
+            </button>
         </div>
-        <div id="adaptations"></div>
+    </div>
+</template>
+<template id="custom-animation-template">
+    <div class="selected-container">
+        <div class="title"></div>
+        <div id="description">
+            <b>Description: </b>
+        </div>
+        <div class="adaptations">
+            <button type="button" class="video-button">
+                <img src="./img/play-icon.png">
+            </button>
+            <button type="button" class="video-button">
+                <img src="./img/reload-icon.png">
+            </button>
+        </div>
+    </div>
+</template>
+<template id="website-template">
+    <div class="selected-container">
+        <div class="title"></div>
+        <div id="description">
+            <b>Description: </b>
+        </div>
+    </div>
+</template>
+<template id="co2-animation-template">
+    <div class="selected-container">
+        <div class="title"></div>
+        <div id="description">
+            <b>Description: </b>
+        </div>
+        <div id="adaptations">
+            <div class="slider">
+                <h3>Parts Per Million (PPM)</h3>
+                <input type="range" min="" max="" step="1" value="">
+            </div>
+            <div class="info">
+                <div class="info-topic"><b>Sea Level:</b></div>
+                <div class="info-content"></div>
+            </div>
+            <div class="info">
+                <div class="info-topic"><b>Temperature:</b></div>
+                <div class="info-content"></div>
+            </div>
+            <div class="info">
+                <div class="info-topic"><b>Year:</b></div>
+                <div class="info-content"></div>
+            </div>
+        </div>
         <button type="button" class="button">Start Animation</button>
-    </div>
-</template>
-<template id="slider-template">
-    <div class="slider">
-        <h3></h3>
-        <input type="range" min="" max="" step="" value="">
-    </div>
-</template>
-<template id="info-template">
-    <div class="info">
-        <div class="info-topic"></div>
-        <div class="info-content"></div>
     </div>
 </template>
 </html> 
