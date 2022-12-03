@@ -1,5 +1,10 @@
 import * as http from './http.js'
 
+import { fillCo2Template } from './animations/co2.animation.js'
+import { fillCustomTemplate } from './animations/custom.animation.js' 
+import { fillVideoTemplate } from './animations/video.animation.js'
+import { fillWebsiteTemplate } from './animations/website.animation.js'
+
 const selectAnimationDiv = document.getElementById('animation-selected')
 
 let currentSelection = null
@@ -20,6 +25,11 @@ function makeSelectFunction(animation) {
     return select
 }
 
+/**
+ * Clears the current selected animation.
+ * 
+ * @returns {void}
+ */
 function clearSelection() {
     if (currentSelection === null) {
         return
@@ -29,76 +39,44 @@ function clearSelection() {
     currentSelection = null
 }
 
+/**
+ * Displays the selected animation in the {@constant selectAnimationDiv}. 
+ * 
+ * @param {json} animation JSON containing information about the selected animation. 
+ *  
+ * @returns {void}
+ */
 function displaySelectedAnimation(animation) {
     let type = animation['AnimationType']
 
     switch (type) {
         case 'custom':
-            return createCustomAnimation()
+            return createAnimation('#custom-animation-template', fillCustomTemplate)
         case 'website':
-            return createWebsiteAnimation()
+            return createAnimation('#website-template', fillWebsiteTemplate)
         case 'video':
-            return createVideoAnimation()
+            return createAnimation('#video-animation-template',fillVideoTemplate)
         case 'co2':
-            return createCo2Animation()
+            return createAnimation('#co2-animation-template',fillCo2Template)
         default:
             break;
     }
 }
 
-function createCustomAnimation() {
-    let template = document.querySelector('#custom-animation-template')
+/**
+ * Requests the animation specific information and passes is to the callback.
+ * 
+ * @param {string}      templateId  Id of the html-template which will be used for the animation. 
+ * @param {function(data)}  callback    Callback which creates the animation with the animation specific data.
+ */
+function createAnimation(templateId, callback) {
+    let template = document.querySelector(templateId)
     let clone = template.content.cloneNode(true)
 
     http.GET(
         http.ANIMATION_INFORMATION, 
         (data) => {
-            console.log('hi, custom')
-        }
-    )
-
-    currentSelection = clone.firstElementChild
-    selectAnimationDiv.appendChild(clone)
-}
-
-function createWebsiteAnimation() {
-    let template = document.querySelector('#website-template')
-    let clone = template.content.cloneNode(true)
-
-    http.GET(
-        http.ANIMATION_INFORMATION, 
-        (data) => {
-            console.log('hi, website')
-        }
-    )
-
-    currentSelection = clone.firstElementChild
-    selectAnimationDiv.appendChild(clone)
-}
-
-function createVideoAnimation() {
-    let template = document.querySelector('#video-animation-template')
-    let clone = template.content.cloneNode(true)
-
-    http.GET(
-        http.ANIMATION_INFORMATION, 
-        (data) => {
-            console.log('hi, video')
-        }
-    )
-
-    currentSelection = clone.firstElementChild
-    selectAnimationDiv.appendChild(clone)
-}
-
-function createCo2Animation() {
-    let template = document.querySelector('#co2-animation-template')
-    let clone = template.content.cloneNode(true)
-
-    http.GET(
-        http.ANIMATION_INFORMATION, 
-        (data) => {
-            console.log('hi, co2')
+            callback(clone, data)
         }
     )
 
