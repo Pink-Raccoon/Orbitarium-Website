@@ -23,8 +23,10 @@ const fillCo2Template = (template, data) => {
     infoNodes[1].querySelector('.info-content').textContent = data['Information']['Temp']
     infoNodes[2].querySelector('.info-content').textContent = data['Information']['Year']
 
-    let button = template.querySelector('#co2-button')
-    button.addEventListener('click', (co2Button(button, data['IsPlaying'])))
+    let playPauseButton = template.querySelector('#play-pause-button-co2')
+    let reloadButton = template.querySelector('#reload-button-co2')
+    playPauseButton.addEventListener('click', (handlePlayPause(playPauseButton, data['IsPlaying'])))
+    reloadButton.addEventListener('click', (handleReload(reloadButton)))
 }
 
 const sendSliderChangeValue = (value) => {
@@ -40,15 +42,27 @@ const sendSliderChangeValue = (value) => {
 
 const co2Button = (button, playing) => {
     let isPlaying = playing
+    return () => {
+        http.POST(http.ADAPT_ANIMATION,
+            {
+                CommandName: "play_pause_co2"
+            },
+            changeText)
+    }
+}
 
-    let changeText = () => {
+const handlePlayPause = (button, playing) => {
+    let isPlaying = playing;
+
+    const togglePlayPause = () => {
         if (isPlaying) {
-            button.innerHTML = 'Stop Animation'
             isPlaying = false
         } else {
-            button.innerHTML = 'Start Animation'
             isPlaying = true
         }
+
+        (button.querySelectorAll('img')).forEach(img => img.classList.toggle('hidden'))
+        button.parentNode.classList.toggle('animation-play-button')
     }
 
     return () => {
@@ -56,7 +70,26 @@ const co2Button = (button, playing) => {
             {
                 CommandName: "play_pause_co2"
             },
-            changeText)
+            togglePlayPause)
+    }
+}
+
+const handleReload = (button) => {
+    const animateReloading = () => {
+        button.parentNode.classList.toggle('animation-play-button')
+    }
+
+    return () => {
+        animateReloading() // starts the animation
+        http.POST(http.ADAPT_ANIMATION,
+            {
+                CommandName: "reset_co2"
+            },
+            () => {
+                setTimeout(animateReloading, 500)
+            }) // stops the animation
+
+            // todo: add fail clause, else animation will not stop
     }
 }
 
