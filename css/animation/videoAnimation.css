@@ -65,18 +65,19 @@
     content: '';
     position: absolute;
     z-index: -1;
-    width: calc(100% + 12%);
+    width: calc(100% + 10%);
     height: calc(100% + 12%);
     top: -6%;
-    left: -6%;
-    background: linear-gradient(45deg, 
-        #0096FF, #0047AB, #000000, #6082B6, #87CEEB, #00008B, #145DA0,
-        #00008B, #145DA0, #0096FF, #0047AB, #000000, #6082B6, #87CEEB
+    left: -5%;
+    background: repeating-linear-gradient(45deg, 
+        #0096FF, #0047AB, #6082B6, #87CEEB, #00008B, #145DA0,
+        #145DA0, #00008B, #87CEEB, #6082B6, #0047AB, #0096FF 
+        50%
     );
     background-repeat: repeat;
     border-radius: 5px;
-    background-size: 500%;
-    animation: border 12s linear infinite;
+    background-size: 200% 200%;
+    animation: border 2s linear infinite;
 }
 
 .animation-play-button::after {
@@ -85,10 +86,10 @@
 
 @keyframes border {
     0% {
-        background-position: 0% 0%;
+        background-position: bottom left;
     }
 
     100% {
-        background-position: 250% 250%;
+        background-position: top right;
     }
 }
