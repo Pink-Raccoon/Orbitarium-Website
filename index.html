@@ -61,13 +61,23 @@
         <div id="description">
             <b>Description: </b>
         </div>
-        <div class="adaptations">
-            <button type="button" class="video-button">
-                <img src="./img/play-icon.png">
-            </button>
-            <button type="button" class="video-button">
-                <img src="./img/reload-icon.png">
-            </button>
+        <div class="adaptations button-container">
+            <div class="video-button-container button-left">
+                <div class="video-button">
+                    <button id="play-pause-button-custom" type="button" class="video-button">
+                        <img src="./img/play-icon.png">
+                        <img src="./img/pause-icon.png" class="hidden">
+                    </button>
+                </div>
+            </div>
+            <div class="video-button-container button-right">
+                <div class="video-button">
+                    <button id="reload-button" type="button" class="video-button">
+                        <img src="./img/reload-icon.png">
+                    </button>
+                </div>
+            </div>
+            </div>
         </div>
     </div>
 </template>

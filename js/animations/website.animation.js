@@ -1,5 +1,6 @@
 const fillWebsiteTemplate = (template, data) => {
-    console.log(data)
+    template.querySelector('.title').textContent = data['Name']
+    template.querySelector('#description').append(document.createTextNode(data['Description']))
 }
 
 
