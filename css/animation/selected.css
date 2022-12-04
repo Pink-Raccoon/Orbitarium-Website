@@ -2,6 +2,13 @@
     font-size: 32px;
 }
 
+.no-animation-selected {
+    width: 30%;
+    height: auto;
+
+    margin: 5% 2%;
+} 
+
 .adaptations {
     margin-bottom: 20px;
 }

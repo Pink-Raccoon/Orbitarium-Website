@@ -34,6 +34,7 @@ function makeSelectFunction(animation) {
  */
 function clearSelection() {
     if (currentSelection === null) {
+        document.querySelectorAll('#animations-container > .no-animation-selected').forEach(child => child.classList.remove('no-animation-selected'))
         return
     }
     
