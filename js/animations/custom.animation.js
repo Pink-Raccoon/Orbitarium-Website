@@ -26,11 +26,14 @@ const handlePlayPause = (button) => {
 
     return () => {
         let command = isPlaying ? "stop_custom" : "continue_custom"
-        http.POST(http.ADAPT_ANIMATION,
-            {
+        let args = {
+            URL: http.ADAPT_ANIMATION,
+            body: {
                 CommandName: command
             },
-            togglePlayPause)
+            success: togglePlayPause
+        }
+        http.POST(args)
     }
 }
 
@@ -41,13 +44,15 @@ const handleReload = (button) => {
 
     return () => {
         animateReloading() // starts the animation
-        http.POST(http.ADAPT_ANIMATION,
-            {
+        let args = {
+            URL: http.ADAPT_ANIMATION,
+            body: {
                 CommandName: "start_custom"
             },
-            animateReloading) // stops the animation
-
-            // todo: add fail clause, else animation will not stop
+            success: animateReloading,
+            error: animateReloading 
+        }
+        http.POST(args)
     }
 }
 

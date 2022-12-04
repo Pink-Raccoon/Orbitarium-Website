@@ -17,11 +17,14 @@ const handleFastBackwards = (button) => {
     const toggleSkip = () => button.parentNode.classList.toggle('animation-play-button')
 
     return () => {
-        http.POST(http.ADAPT_ANIMATION,
-            {
+        let args = {
+            URL: http.ADAPT_ANIMATION,
+            body: {
                 CommandName: "skip_backward"
             },
-            toggleSkip)
+            success: toggleSkip 
+        }
+        http.POST(args)
     }
 }
 
@@ -32,11 +35,14 @@ const handlePlayPause = (button) => {
     }
 
     return () => {
-        http.POST(http.ADAPT_ANIMATION,
-            {
+        let args = {
+            URL: http.ADAPT_ANIMATION,
+            body: {
                 CommandName: "play_pause_video"
             },
-            togglePlayPause)
+            success: togglePlayPause
+        }
+        http.POST(args)
     }
 }
 
@@ -44,11 +50,14 @@ const handleFastForward = (button) => {
     const toggleSkip = () => button.parentNode.classList.toggle('animation-play-button')
 
     return () => {
-        http.POST(http.ADAPT_ANIMATION,
-            {
+        let args = {
+            URL: http.ADAPT_ANIMATION,
+            body: {
                 CommandName: "skip_forward"
             },
-            toggleSkip)
+            success: toggleSkip 
+        }
+        http.POST(args)
     }
 }
 

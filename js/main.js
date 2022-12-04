@@ -2,7 +2,11 @@ import * as http from './http.js'
 import * as select from './selected.js'
 
 function loadAnimations() {
-    http.GET(http.All_ANIMATIONS, createAnimationElements)
+    let args = {
+        URL: http.All_ANIMATIONS,
+        success: createAnimationElements
+    }
+    http.GET(args)
 }
 
 function createAnimationElements(json) {
@@ -17,9 +21,13 @@ function createAnimationElements(json) {
         clone.firstElementChild.addEventListener('click', fSelect)
 
         let parent = clone.querySelector('.image')
-        http.GETImage((imgURL) => {
-            appendImage(parent, imgURL)
-        }, animation['Key'])
+        let args = {
+            animationKey: animation['Key'],
+            success: (imgURL) => {
+                appendImage(parent, imgURL)
+            } 
+        }
+        http.GETImage(args)
 
         clone.querySelector('.name').textContent = animation['Name']
 

@@ -9,71 +9,85 @@ export const ROTATE_ANIMATION = BASE + '/rotate'
 export const GET_ANIMATION_IMAGES = BASE + '/image'
 
 /**
- * Send a GET request to the url of interest.
+ * Send a GET request to the desired URL.
  * 
- * @param {string}          url         The url at which the request will be sent.
- * @param {function(data)}  callback    Callback which is being called when request was handled successfully. 
- * @param {object}          params      An object containting parameters key, value pairs which will be appended to the url.
+ * @param {object}          properties - Object which contains all required information.
+ * @param {string}          properties.URL - The URL for the request.
+ * @param {function(data)}  properties.success - Callback which is called, if the request was successful (Status Code 200-299)
+ * @param {function(data)}  properties.error - Callback which is callled, if the request was not successful
  */
-export const GET = (url, callback, params = {}) => {
-    url += '?'
+export const GET = (properties) => {
+    if (!properties.hasOwnProperty('URL')) {
+        throw "GET-Request has no URL to call."
+    }
+    
+    properties.URL += '?'
     let notFirst = false;
-    for (let key in params) {
+    for (let key in properties?.params) {
         if (params.hasOwnProperty(key)) {
             url += (notFirst ? '&' : '') + key + "=" + params[key];
         }
         notFirst = true;
     }
 
-    fetch(url)
+    fetch(properties.URL)
     .then((response) => {
-        if (!response.ok) {
-            throw "Network error"
-        }
-
-        return response.json()
+        return response.ok 
+            ? response.json()
+            : properties?.error?.()
     })
-    .then((data) => callback(data))
-    .catch((err) => console.log(err))
+    .then((data) => properties?.success?.(data))
+    .catch((data) => properties?.error?.(data))
 }
 
 /**
- * Send a POST request to the url of interest. Additional data will be passed in the body.
+ * Send a POST request to the url of interest.
  * 
- * @param {string}          url         The url at which the request will be sent.
- * @param {object}          data        An object containting all data which will be added to the body.
- * @param {function()}      callback    Callback which is being called when request was handled successfully.   
+ * @param {object}          properties - Object which contains all required information.
+ * @param {string}          properties.URL - The URL for the request.
+ * @param {object}          properties.body - The body for the post request. 
+ * @param {function()}  properties.success - Callback which is called, if the request was successful (Status Code 200-299)
+ * @param {function()}  properties.error - Callback which is callled, if the request was not successful
  */
-export const POST = (url, data, callback) => {
-    fetch(url, {
+export const POST = (properties) => {
+    if (!properties.hasOwnProperty('URL') && !properties.hasOwnProperty('body')) {
+        throw 'POST-Request has no URL to call or body to pass.'
+    }
+
+    fetch(properties.URL, {
         method: 'POST',
-        body: JSON.stringify(data)
+        body: JSON.stringify(properties.body)
     })
     .then((response) => {
-        if (response.ok) {
-            callback()
-        }
+        return response.ok 
+            ? properties?.success?.()
+            : properties?.error?.()
     })
-    .catch((err) => console.log(url + ' ' + err))
+    .catch((err) => properties?.error?.())
 }
 
 /**
  * Get an image from the server.
  * 
- * @param {function(data)}  callback    Callback which is being called when request was handled successfully.  
- * @param {string}          key         The key of the animation of which the image should be received.
+ * @param {object}          properties - Object which contains all required information.
+ * @param {string}          properties.animationKey - The key of the animation of which the image should be retreived.
+ * @param {function(data)}  properties.success - Callback which is called, if the request was successful (Status Code 200-299)
+ * @param {function(data)}  properties.error - Callback which is callled, if the request was not successful
  */
-export const GETImage = (callback, key) => {
-    fetch(GET_ANIMATION_IMAGES + '?key=' + key, {
+export const GETImage = (properties) => {
+    if (!properties.hasOwnProperty('animationKey')) {
+        throw 'GET-Request has no animationKey.'
+    }
+
+    fetch(GET_ANIMATION_IMAGES + '?key=' + properties.animationKey, {
         referrerPolicy: 'same-origin'
     })
     .then((response) => {
-        if (!response.ok) {
-            throw "network error"
-        }
+        return response.ok 
+            ? response.blob()
+            : properties?.error?.()
 
-        return response.blob()
     })
-    .then((blob) => callback(URL.createObjectURL(blob)))
-    .catch((err) => console.log(err))
+    .then((blob) => properties?.success?.(URL.createObjectURL(blob)))
+    .catch((err) => properties?.error?.())
 }

@@ -30,25 +30,17 @@ const fillCo2Template = (template, data) => {
 }
 
 const sendSliderChangeValue = (value) => {
-    http.POST(http.ADAPT_ANIMATION, 
-        {
+    let args = {
+        URL: http.ADAPT_ANIMATION,
+        body: {
             CommandName: "update_co2_level",
             Data: {
                 ppm: value
             }
         },
-        () => console.log('successfully updated'))
-}
-
-const co2Button = (button, playing) => {
-    let isPlaying = playing
-    return () => {
-        http.POST(http.ADAPT_ANIMATION,
-            {
-                CommandName: "play_pause_co2"
-            },
-            changeText)
+        success: () => console.log('successfully updated') 
     }
+    http.POST(args)
 }
 
 const handlePlayPause = (button, playing) => {
@@ -66,11 +58,14 @@ const handlePlayPause = (button, playing) => {
     }
 
     return () => {
-        http.POST(http.ADAPT_ANIMATION,
-            {
+        let args = {
+            URL: http.ADAPT_ANIMATION,
+            body: {
                 CommandName: "play_pause_co2"
             },
-            togglePlayPause)
+            success: togglePlayPause
+        }
+        http.POST(args)
     }
 }
 
@@ -81,15 +76,21 @@ const handleReload = (button) => {
 
     return () => {
         animateReloading() // starts the animation
-        http.POST(http.ADAPT_ANIMATION,
-            {
+
+        let args = {
+            URL: http.ADAPT_ANIMATION,
+            body: {
                 CommandName: "reset_co2"
             },
-            () => {
+            success: () => {
+                // Server handles request faster than animation can be shown. Therefore
+                // add a timer so users see animation before it is being stopped again.
                 setTimeout(animateReloading, 500)
-            }) // stops the animation
+            },
+            error: () => animateReloading
+        }
 
-            // todo: add fail clause, else animation will not stop
+        http.POST(args)
     }
 }
 

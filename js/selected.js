@@ -14,12 +14,14 @@ function makeSelectFunction(animation) {
         clearSelection()
         selectAnimationDiv.classList.remove('hidden')
 
-        http.POST(http.SELECT_ANIMATION, {
-            animationKey: animation['Key']
-        },
-        () => {
-            displaySelectedAnimation(animation)
-        })
+        let args = {
+            URL: http.SELECT_ANIMATION,
+            body: {
+                animationKey: animation['Key']
+            },
+            success: () => displaySelectedAnimation(animation)
+        }
+        http.POST(args)
     }
 
     return select
@@ -74,12 +76,11 @@ function createAnimation(templateId, callback) {
     let clone = template.content.cloneNode(true)
     currentSelection = clone.firstElementChild
 
-    http.GET(
-        http.ANIMATION_INFORMATION, 
-        (data) => {
-            callback(currentSelection, data)
-        }
-    )
+    let args = {
+        URL: http.ANIMATION_INFORMATION,
+        success: (data) => callback(currentSelection, data)
+    }
+    http.GET(args)
 
     selectAnimationDiv.appendChild(clone)
 }
