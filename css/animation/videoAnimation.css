@@ -48,6 +48,7 @@
 
 .button-left {
     justify-content: end;
+    padding-right: 10px;
 }
 
 .button-middle {
@@ -57,6 +58,7 @@
 
 .button-right {
     justify-content: start;
+    padding-left: 10px;
 }
 
 
