@@ -17,6 +17,7 @@ const fillCo2Template = (template, data) => {
     slider.addEventListener('input', (event) => {
         sliderValue.innerHTML = event.srcElement.value 
     })
+    sliderValue.innerHTML = data['Adaption']['Slider']['Value']
 
     let infoNodes = template.querySelectorAll('.info')
     infoNodes[0].querySelector('.info-content').textContent = data['Information']['SeaLevel']
