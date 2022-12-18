@@ -5,6 +5,8 @@ import { fillCustomTemplate } from './animations/custom.animation.js'
 import { fillVideoTemplate } from './animations/video.animation.js'
 import { fillWebsiteTemplate } from './animations/website.animation.js'
 
+import { rotate } from './roation.js'
+
 const selectAnimationDiv = document.getElementById('animation-selected')
 
 let currentSelection = null
@@ -82,6 +84,9 @@ function createAnimation(templateId, callback) {
         success: (data) => callback(currentSelection, data)
     }
     http.GET(args)
+
+    clone.querySelector('#button-rotate-left').addEventListener('click', () => rotate(0, -1))
+    clone.querySelector('#button-rotate-right').addEventListener('click', () => rotate(0, 1))
 
     selectAnimationDiv.appendChild(clone)
 }

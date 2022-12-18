@@ -12,13 +12,19 @@
 
 .info {
     display: grid;
-    grid-template-columns: 10% 80%;
+    grid-template-columns: 15% 85%;
 
     margin: 2px auto 2px auto;
 }
 
 .info-topic {
     font-weight: bold;
+}
+
+#slider-value {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
 }
 
 #co2-button {
