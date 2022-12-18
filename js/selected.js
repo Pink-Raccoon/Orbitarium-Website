@@ -85,10 +85,20 @@ function createAnimation(templateId, callback) {
     }
     http.GET(args)
 
-    clone.querySelector('#button-rotate-left').addEventListener('click', () => rotate(0, -1))
-    clone.querySelector('#button-rotate-right').addEventListener('click', () => rotate(0, 1))
-
+    createRotationHandlers(clone)
     selectAnimationDiv.appendChild(clone)
+}
+
+function createRotationHandlers(clone) {
+    clone.querySelector('#button-rotate-left').addEventListener('click', (event) => {
+        event.target.parentElement.parentElement.classList.toggle('animation-play-button')
+        rotate(0, -1)
+    })
+    
+    clone.querySelector('#button-rotate-right').addEventListener('click', (event) => {
+        event.target.parentElement.parentElement.classList.toggle('animation-play-button')
+        rotate(0, 1)
+    })
 }
 
 export {
