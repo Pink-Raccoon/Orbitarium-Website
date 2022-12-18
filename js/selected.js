@@ -92,14 +92,22 @@ function createAnimation(templateId, callback) {
 function createRotationHandlers(template) {
     let buttonLeft = template.querySelector('#button-rotate-left')
     let buttonRight = template.querySelector('#button-rotate-right')
+    let leftClassList = buttonLeft.parentNode.classList 
+    let rightClassList = buttonRight.parentNode.classList 
 
     buttonLeft.addEventListener('click', () => {
-        buttonLeft.parentNode.classList.toggle('animation-play-button')
+        if (rightClassList.contains('animation-play-button')) {
+            rightClassList.toggle('animation-play-button')
+        }
+        leftClassList.toggle('animation-play-button')
         rotate(0, -1)
     })
 
     buttonRight.addEventListener('click', () => {
-        buttonRight.parentNode.classList.toggle('animation-play-button')
+        if (leftClassList.contains('animation-play-button')) {
+            leftClassList.toggle('animation-play-button')
+        }
+        rightClassList.toggle('animation-play-button')
         rotate(0, 1)
     })
 }

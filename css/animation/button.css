@@ -72,8 +72,8 @@
     top: -4%;
     left: -3%;
     background: repeating-linear-gradient(45deg, 
-        #0096FF, #0047AB, #6082B6, #87CEEB, #00008B, #145DA0,
-        #145DA0, #00008B, #87CEEB, #6082B6, #0047AB, #0096FF 
+        #0096FF, #0047AB, #36609f, #51aace, #145DA0,
+        #145DA0, #51aace, #36609f, #0047AB, #0096FF 
         50%
     );
     background-repeat: repeat;
@@ -82,8 +82,9 @@
     animation: border 2s linear infinite;
 }
 
+
 .animation-play-button::after {
-    filter: blur(30px);
+    filter: blur(5px);
 }
 
 @keyframes border {

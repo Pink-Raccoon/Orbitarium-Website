@@ -14,7 +14,11 @@ const fillVideoTemplate = (template, data) => {
 }
 
 const handleFastBackwards = (button) => {
-    const toggleSkip = () => button.parentNode.classList.toggle('animation-play-button')
+    const toggleSkip = () => {
+        let toggle = () => button.parentNode.classList.toggle('animation-play-button')
+        toggle() 
+        setTimeout(toggle, 300)
+    }
 
     return () => {
         let args = {
@@ -47,7 +51,11 @@ const handlePlayPause = (button) => {
 }
 
 const handleFastForward = (button) => {
-    const toggleSkip = () => button.parentNode.classList.toggle('animation-play-button')
+    const toggleSkip = () => {
+        let toggle = () => button.parentNode.classList.toggle('animation-play-button')
+        toggle() 
+        setTimeout(toggle, 300)
+    }
 
     return () => {
         let args = {
@@ -60,8 +68,6 @@ const handleFastForward = (button) => {
         http.POST(args)
     }
 }
-
-
 
 export {
     fillVideoTemplate as fillVideoTemplate
