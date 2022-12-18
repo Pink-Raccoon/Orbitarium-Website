@@ -60,9 +60,9 @@ function displaySelectedAnimation(animation) {
         case 'website':
             return createAnimation('#website-template', fillWebsiteTemplate)
         case 'video':
-            return createAnimation('#video-animation-template',fillVideoTemplate)
+            return createAnimation('#video-animation-template', fillVideoTemplate)
         case 'co2':
-            return createAnimation('#co2-animation-template',fillCo2Template)
+            return createAnimation('#co2-animation-template', fillCo2Template)
         default:
             break;
     }
@@ -85,18 +85,21 @@ function createAnimation(templateId, callback) {
     }
     http.GET(args)
 
-    createRotationHandlers(clone)
+    createRotationHandlers(currentSelection)
     selectAnimationDiv.appendChild(clone)
 }
 
-function createRotationHandlers(clone) {
-    clone.querySelector('#button-rotate-left').addEventListener('click', (event) => {
-        event.target.parentElement.parentElement.classList.toggle('animation-play-button')
+function createRotationHandlers(template) {
+    let buttonLeft = template.querySelector('#button-rotate-left')
+    let buttonRight = template.querySelector('#button-rotate-right')
+
+    buttonLeft.addEventListener('click', () => {
+        buttonLeft.parentNode.classList.toggle('animation-play-button')
         rotate(0, -1)
     })
-    
-    clone.querySelector('#button-rotate-right').addEventListener('click', (event) => {
-        event.target.parentElement.parentElement.classList.toggle('animation-play-button')
+
+    buttonRight.addEventListener('click', () => {
+        buttonRight.parentNode.classList.toggle('animation-play-button')
         rotate(0, 1)
     })
 }
