@@ -8,7 +8,9 @@ const fillCustomTemplate = (template, data) => {
     let reloadButton = template.querySelector('#reload-button')
    
     playPauseButton.addEventListener('click', (handlePlayPause(playPauseButton)))
-    reloadButton.addEventListener('click', (handleReload(reloadButton)))
+    reloadButton.addEventListener('click', (handleReload(reloadButton, data['Key'], (startAnimation(playPauseButton)))))
+
+    startAnimation(playPauseButton)
 }
 
 const handlePlayPause = (button) => {
@@ -37,25 +39,38 @@ const handlePlayPause = (button) => {
     }
 }
 
-const handleReload = (button) => {
+const startAnimation = (button) => {
+    let args = {
+        URL: http.ADAPT_ANIMATION,
+        body: {
+            CommandName: "start_custom"
+        },
+        success: () => {button.parentNode.classList.toggle('animation-play-button')}
+    }
+    http.POST(args)
+    
+}
+
+const handleReload = (button, key, startAnimationCallback) => {
     const animateReloading = () => {
         button.parentNode.classList.toggle('animation-play-button')
     }
 
     return () => {
-        animateReloading() // starts the animation
         let args = {
-            URL: http.ADAPT_ANIMATION,
+            URL: http.SELECT_ANIMATION,
             body: {
-                CommandName: "start_custom"
+                animationKey: key
             },
-            success: animateReloading,
-            error: animateReloading 
+            success: () => {
+                animateReloading()
+                startAnimationCallback()
+            },
+            error: animateReloading
         }
         http.POST(args)
     }
 }
-
 
 export {
     fillCustomTemplate as fillCustomTemplate
