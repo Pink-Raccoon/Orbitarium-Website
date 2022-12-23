@@ -29,11 +29,6 @@ function makeSelectFunction(animation) {
     return select
 }
 
-/**
- * Clears the current selected animation.
- * 
- * @returns {void}
- */
 function clearSelection() {
     if (currentSelection === null) {
         document.querySelectorAll('#animations-container > .no-animation-selected').forEach(child => child.classList.remove('no-animation-selected'))
@@ -71,7 +66,7 @@ function displaySelectedAnimation(animation) {
 /**
  * Requests the animation specific information and passes is to the callback.
  * 
- * @param {string}      templateId  Id of the html-template which will be used for the animation. 
+ * @param {string}          templateId  Id of the html-template which will be used for the animation. 
  * @param {function(data)}  callback    Callback which creates the animation with the animation specific data.
  */
 function createAnimation(templateId, callback) {
@@ -100,7 +95,11 @@ function createRotationHandlers(template) {
             rightClassList.toggle('animation-play-button')
         }
         leftClassList.toggle('animation-play-button')
-        rotate(0, -1)
+        if (leftClassList.contains('animation-play-button')) {
+            rotate(0, -1)
+        } else {
+            rotate(0, 0)
+        }
     })
 
     buttonRight.addEventListener('click', () => {
@@ -108,7 +107,11 @@ function createRotationHandlers(template) {
             leftClassList.toggle('animation-play-button')
         }
         rightClassList.toggle('animation-play-button')
-        rotate(0, 1)
+        if (rightClassList.contains('animation-play-button')) {
+            rotate(0, -1)
+        } else {
+            rotate(0, 0)
+        }
     })
 }
 

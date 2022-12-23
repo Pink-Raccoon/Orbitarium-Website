@@ -46,8 +46,8 @@ export const GET = (properties) => {
  * @param {object}          properties - Object which contains all required information.
  * @param {string}          properties.URL - The URL for the request.
  * @param {object}          properties.body - The body for the post request. 
- * @param {function()}  properties.success - Callback which is called, if the request was successful (Status Code 200-299)
- * @param {function()}  properties.error - Callback which is callled, if the request was not successful
+ * @param {function()}      properties.success - Callback which is called, if the request was successful (Status Code 200-299)
+ * @param {function()}      properties.error - Callback which is callled, if the request was not successful
  */
 export const POST = (properties) => {
     if (!properties.hasOwnProperty('URL') && !properties.hasOwnProperty('body')) {
